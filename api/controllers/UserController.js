@@ -54,7 +54,6 @@ module.exports = {
       sails.config.returnCode.SUCCESS.data = recs;
       return res.json(sails.config.returnCode.SUCCESS);
     });
-
   },
 
   update: function(req, res) {
