@@ -39,8 +39,7 @@ module.exports = {
       }
 
       if (recs.length == 0) {
-        sails.config.returnCode.SUCCESS.data = null;
-        return res.json(sails.config.returnCode.SUCCESS);
+        return res.json(sails.config.returnCode.NOT_EXIST);
       } else {
         sails.config.returnCode.SUCCESS.data = recs;
         return res.json(sails.config.returnCode.SUCCESS);

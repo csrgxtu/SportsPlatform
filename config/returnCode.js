@@ -25,6 +25,12 @@ module.exports.returnCode = {
     data: null
   },
 
+  NOT_EXIST: {
+    code: 404,
+    msg: 'Not Exist',
+    data: null
+  },
+
   DATABASE_ERROR: {
     code: 500,
     msg: 'DATABASE ERROR',
