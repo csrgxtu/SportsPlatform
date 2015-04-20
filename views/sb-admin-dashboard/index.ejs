@@ -29,12 +29,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 </head>
 
 <body>
 
-    <div id="wrapper">
+    <div id="wrapper" ng-app="Dashboard">
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -221,7 +221,8 @@
                 </div>
                 <!-- /.row -->
 
-                <div class="row">
+                <!-- Statistic Table -->
+                <div class="row" ng-controller="CameraStatus">
                   <div class="table-responsive">
                     <table class="table table-bordered">
                       <thead class="bg-info">
@@ -260,11 +261,28 @@
                           <td>ON</td>
                           <td>some description here</td>
                         </tr>
+                        <p>{{data}}</p>
                       </tbody>
                     </table>
                   </div>
                 </div>
                 <!-- /.row -->
+
+                <!-- Angular controller scripts -->
+                <script>
+                  var app = angular.module('Dashboard', []);
+                  app.controller('CameraStatus', function($scope, $http) {
+                    var baseUrl = '/Camera/read';
+                    $http.get(baseUrl)
+                    .success(function(response) {
+                      console.log(response);
+
+                      if (response.code == 200) {
+                        $scope.data = response.data;
+                      }
+                    });
+                  });
+                </script>
 
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
