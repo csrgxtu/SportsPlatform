@@ -40,7 +40,7 @@
 <body ng-app="SignIn"  ng-controller="FormController">
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" id="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputUserName" class="sr-only">Email address</label>
 
@@ -57,14 +57,29 @@
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="signin()">Sign in</button>
+
+        <br/>
+        <br/>
+        <br/>
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="false" id="warning">
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+          </button>
+            Incorrect UserName and Password
+        </div>
       </form>
 
+
+
     </div> <!-- /container -->
+
+
 
     <!-- Angular controllers -->
     <script>
       var app = angular.module('SignIn', []);
-      app.controller('FormController', function($scope, $http) {
+      app.controller('FormController', function($scope, $http, $window) {
         $scope.signin = function() {
           var userName = $scope.Account.UserName;
           var password = $scope.Account.Password;
@@ -75,6 +90,13 @@
           $http.get(url)
           .success(function cb(response) {
             console.log(response);
+            if (response.code == 200) {
+              $window.open('/Camera/index', '_self');
+            } else {
+              var ele = angular.element(document.querySelector( '#warning'));
+              ele.attr('ng-show', "true");
+              console.log('404');
+            }
           })
         }
       });
