@@ -12,6 +12,10 @@ module.exports = {
     return res.view('sb-admin-dashboard/index', {layout: null});
   },
 
+  signin: function(req, res) {
+    return res.view('sb-admin-dashboard/signin', {layout: null});
+  },
+
   create: function(req, res) {
 
   },
