@@ -12,6 +12,10 @@ module.exports = {
     return res.view('sb-admin-dashboard/index', {layout: null});
   },
 
+  live: function(req, res) {
+    return res.view('sb-admin-dashboard/live', {layout: null});
+  },
+
   /**
    * create record in Camera
    *
