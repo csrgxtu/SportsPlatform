@@ -55,7 +55,7 @@
        defaultsTo: 'OFF'
      },
 
-     description: {
+     Description: {
        type: 'STRING',
      },
 
