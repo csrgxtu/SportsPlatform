@@ -26,10 +26,7 @@ module.exports = {
     var userName = req.param('userName');
     var password = req.param('password');
     if (!userName && !password) {
-      return res.json({
-        code: 403,
-        msg: 'Parameter Error'
-      });
+      return res.json(sails.config.returnCode.INVALID_PARAM);
     }
 
     User.find()
@@ -37,22 +34,16 @@ module.exports = {
     .where({Password: password})
     .exec(function cb(err, recs) {
       if (err) {
-        return res.json({
-          code: 500,
-          msg: 'Database Error'
-        });
+        sails.config.returnCode.DATABASE_ERROR.data = err;
+        return res.json(sails.config.returnCode.DATABASE_ERROR);
       }
 
       if (recs.length == 0) {
-        return res.json({
-          code: 200,
-          msg: 'not exist'
-        });
+        sails.config.returnCode.SUCCESS.data = null;
+        return res.json(sails.config.returnCode.SUCCESS);
       } else {
-        return res.json({
-          code: 200,
-          msg: 'exist'
-        });
+        sails.config.returnCode.SUCCESS.data = recs;
+        return res.json(sails.config.returnCode.SUCCESS);
       }
     });
   },

@@ -27,10 +27,7 @@ module.exports = {
     var password = req.param('password');
     var createdBy = req.param('createdBy');
     if (!userName && !password && !createdBy) {
-      return res.json({
-        code: 403,
-        msg: 'Parameter Error'
-      });
+      return res.json(sails.config.returnCode.INVALID_PARAM);
     }
 
     User.create({
@@ -40,17 +37,12 @@ module.exports = {
     })
     .exec(function cb(err, recs) {
       if (err) {
-        return res.json({
-          code: 500,
-          msg: 'Database Error',
-          data: err
-        });
+        sails.config.returnCode.DATABASE_ERROR.data = err;
+        return res.json(sails.config.returnCode.DATABASE_ERROR);
       }
 
-      return res.json({
-        code: 200,
-        msg: recs
-      })
+      sails.config.returnCode.SUCCESS.data = recs;
+      return res.json(sails.config.returnCode.SUCCESS);
     });
 
   },
@@ -59,17 +51,12 @@ module.exports = {
     User.find()
     .exec(function cb(err, recs) {
       if (err) {
-        return res.json({
-          code: 500,
-          msg: 'Database Error',
-          data: err
-        });
+        sails.config.returnCode.DATABASE_ERROR.data = err;
+        return res.json(sails.config.returnCode.DATABASE_ERROR);
       }
 
-      return res.json({
-        code: 200,
-        msg: recs
-      });
+      sails.config.returnCode.SUCCESS.data = recs;
+      return res.json(sails.config.returnCode.SUCCESS);
     });
 
   },
