@@ -33,26 +33,53 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
 </head>
 
-<body>
+<body ng-app="SignIn"  ng-controller="FormController">
     <div class="container">
 
-      <form class="form-signin" method="post" action="/Authentication/signin">
+      <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputUserName" class="sr-only">Email address</label>
-        <input type="text" class="form-control" id="inputUserName" placeholder="UserName">
+
+        <input type="text" class="form-control" id="inputUserName" placeholder="UserName" ng-model="Account.UserName">
+
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="Account.Password" required>
+
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="signin()">Sign in</button>
       </form>
 
     </div> <!-- /container -->
+
+    <!-- Angular controllers -->
+    <script>
+      var app = angular.module('SignIn', []);
+      app.controller('FormController', function($scope, $http) {
+        $scope.signin = function() {
+          var userName = $scope.Account.UserName;
+          var password = $scope.Account.Password;
+          var baseUrl = '/Authentication/signin';
+          var url = baseUrl + '?userName=' + userName
+            + '&password=' + password;
+
+          $http.get(url)
+          .success(function cb(response) {
+            console.log(response);
+          })
+        }
+      });
+
+    </script>
 
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
@@ -64,7 +91,6 @@
     <script src="/js/plugins/morris/raphael.min.js"></script>
     <script src="/js/plugins/morris/morris.min.js"></script>
     <script src="/js/plugins/morris/morris-data.js"></script>
-
 </body>
 
 </html>
