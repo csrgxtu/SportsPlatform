@@ -38,7 +38,6 @@ module.exports = {
       size: 11,
       primaryKey: true,
       autoIncrement: true,
-      notNull: true,
     },
 
     UserName: {
@@ -46,6 +45,7 @@ module.exports = {
       unique: true,
       size: 20,
       notNull: true,
+      required: true
     },
 
     Password: {
