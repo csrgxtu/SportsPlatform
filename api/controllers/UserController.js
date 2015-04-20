@@ -56,6 +56,21 @@ module.exports = {
   },
 
   read: function(req, res) {
+    User.find()
+    .exec(function cb(err, recs) {
+      if (err) {
+        return res.json({
+          code: 500,
+          msg: 'Database Error',
+          data: err
+        });
+      }
+
+      return res.json({
+        code: 200,
+        msg: recs
+      });
+    });
 
   },
 
