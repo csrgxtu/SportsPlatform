@@ -8,10 +8,6 @@
  */
 
 module.exports = {
-  index: function(req, res) {
-    return res.view('sb-admin-dashboard/index', {layout: null});
-  },
-
   /**
    * create a user record
    *
