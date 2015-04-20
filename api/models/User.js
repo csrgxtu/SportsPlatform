@@ -32,7 +32,7 @@ module.exports = {
     }
   },
 
-  attributes: {   
+  attributes: {
     UserID: {
       type: 'INTEGER',
       size: 11,
@@ -79,6 +79,6 @@ module.exports = {
       var obj = this.toObject();
       delete obj.Password;
       return obj;
-    }, 
+    },
   },
 };
